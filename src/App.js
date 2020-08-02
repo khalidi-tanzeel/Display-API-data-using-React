@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React , {Component} from 'react';
+import Form from './Form';
 import './App.css';
+import CompanyList from './CompanyList';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    companyinfoarray: [],
+  };
+ 
+  addCompany = (companyinfo) => {
+  	this.setState(prevState => ({
+    	companyinfoarray: [...prevState.companyinfoarray, companyinfo],
+    }));
+  };
+ 
+	render() {
+  	return (
+    	<div>
+        <Form onSubmit={this.addCompany} />
+        <CompanyList companyinfoarray={this.state.companyinfoarray}/>
+    	</div>
+    );
+  }	
 }
 
 export default App;
